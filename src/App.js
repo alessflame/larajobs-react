@@ -35,12 +35,12 @@ function App() {
                             path="me/update"
                             element={<UpdateUserPage />}
                         />
-                        <Route exact path="cv" element={<ReadCVPage />} />
+                        {/* <Route exact path="cv" element={<ReadCVPage />} />
                         <Route
                             exact
                             path="insertcv"
                             element={<InsertCVPage />}
-                        />
+                        /> */}
                         <Route
                             exact
                             path="myapplications"

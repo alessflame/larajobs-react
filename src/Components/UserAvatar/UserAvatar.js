@@ -15,7 +15,7 @@ function UserAvatar({name}) {
 
         <Box>
           <Heading size='sm'>{name}</Heading>
-          <Text color='teal.400' decoration="ActiveBorder"><Link to="/dashboard/cv" color='teal.400'>Vedi il tuo CV</Link></Text>
+          {/* <Text color='teal.400' decoration="ActiveBorder"><Link to="/dashboard/cv" color='teal.400'>Vedi il tuo CV</Link></Text> */}
         </Box>
       </Flex>
       {/* <IconButton

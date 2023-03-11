@@ -10,7 +10,7 @@ function ReadPdf() {
     const [cv, setCv] = useState("");
 
     const dispatch = useDispatch();
-    const domain= process.env.REACT_APP_SERVER_DOMAIN;
+    const domain= process.env.REACT_APP_SERVER_DOMAIN_FILE;
 
 
     const deleteCV = async () => {

@@ -41,7 +41,7 @@ function ApplicationFormComponent({ job_title }) {
                 onChange={(e) => setLetter(e.target.value)}
                 placeholder="Scrivi una lettera di presentazione"
             />
-            <Button type="submit">Candidati</Button>
+            <Button mt={2} bg={"teal.300"} type="submit">Candidati</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />

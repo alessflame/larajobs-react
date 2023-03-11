@@ -95,7 +95,7 @@ function NavMenuComponent() {
                         <MenuItem>
                             <Link to="/dashboard/me/update">Modifica credenziali</Link>
                         </MenuItem>
-                        <MenuItem><Link to="/dashboard/insertcv">Inserisci il tuo CV</Link></MenuItem>
+                        {/* <MenuItem><Link to="/dashboard/insertcv">Inserisci il tuo CV</Link></MenuItem> */}
                         <Divider />
                         <MenuItem><Link to="/dashboard">Annunci</Link></MenuItem>
                         <MenuItem
