@@ -31,8 +31,7 @@ function NavMenuComponent() {
     const [isOpen, setIsOpen] = useState(false);
     const [isLightMode, setIsLightMode] = useState(getColorMode());
     const dispatch = useDispatch();
-    const {toggleColorMode } = useColorMode()
-
+    const { toggleColorMode } = useColorMode();
 
     const refresh = () => window.location.reload(true);
 
@@ -93,22 +92,24 @@ function NavMenuComponent() {
                             Logout
                         </MenuItem>
                         <MenuItem>
-                            <Link to="/dashboard/me/update">Modifica credenziali</Link>
+                            <Link to="/dashboard/me/update">
+                                Modifica credenziali
+                            </Link>
                         </MenuItem>
                         {/* <MenuItem><Link to="/dashboard/insertcv">Inserisci il tuo CV</Link></MenuItem> */}
                         <Divider />
-                        <MenuItem><Link to="/dashboard">Annunci</Link></MenuItem>
+                        <MenuItem>
+                            <Link to="/dashboard">Annunci</Link>
+                        </MenuItem>
                         <MenuItem
-                            
-                                onClick={() => {
-                                     toggleColorMode();
+                            onClick={() => {
+                                toggleColorMode();
 
-                                    setIsLightMode(!isLightMode);
-                                  
-                                }}
-                            >
-                                {!isLightMode ? "Dark Mode" : "Light Mode"}
-                                <BsFillLightbulbFill />
+                                setIsLightMode(!isLightMode);
+                            }}
+                        >
+                            {!isLightMode ? "Dark Mode" : "Light Mode"}
+                            <BsFillLightbulbFill />
                         </MenuItem>
                     </MenuList>
                 </Menu>
