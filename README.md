@@ -18,7 +18,7 @@ You can create your account and easily apply for offers!
 # Acknowledgements
 
 - ReactJS
-- ChackraUI
+- ChakraUI
 - @redux/toolkit
 - Axios
 - jwt-decode
