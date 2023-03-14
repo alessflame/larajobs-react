@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import UserAvatar from "../../Components/UserAvatar/UserAvatar";
 import JobApplicationsContainer from "../../Components/JobApplicationsContainer/JobApplicationsContainer";
 // import { tokenDecode } from "../../helper/Api/token";
-import { getColorMode } from "../../helper/colorMode/colorMode";
 import useAuth from "../../hooks/useAuth";
 import { getApplications } from "../../helper/Api/GetApi";
 
@@ -60,7 +59,7 @@ function SidebarUser() {
             display="block"
             mb="2px"
             top="0"
-            p={2}
+            p={3}
             margin="10px"
             bg={useColorModeValue("gray.100","gray.900")}
         >

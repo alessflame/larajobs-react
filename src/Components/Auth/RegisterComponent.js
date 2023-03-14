@@ -10,6 +10,7 @@ import {
   InputLeftElement,
   Input,
   InputRightElement,
+  useColorModeValue
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
@@ -17,10 +18,11 @@ import { IoMailSharp } from "react-icons/io5";
 import { fetchSign } from "../../helper/Api/Auth/authApi";
 import { useDispatch } from "react-redux";
 import { isOpen } from "../../redux/slices/modalSlice";
-import { getColorMode } from "../../helper/colorMode/colorMode";
 
 export default function RegisterComponent() {
   const [showPassword, setShowPassword] = useState(false);
+  const [load, setLoad]=useState(false);
+
   const dispatch = useDispatch();
 
   const formik = useFormik({
@@ -32,9 +34,11 @@ export default function RegisterComponent() {
     onSubmit: async (values) => {
       // alert(JSON.stringify(values, null, 2));
       // console.log(values);
+      setLoad(true);
       const response = await fetchSign("register", values);
       //  console.log(response);
       if (!response) {
+        setLoad(false);
         return dispatch(
           isOpen({
             title: "Impossibile registrare",
@@ -42,6 +46,7 @@ export default function RegisterComponent() {
           })
         );
       } else {
+        setLoad(false);
         return dispatch(
           isOpen({ title: "Registrato con successo", text: response.message })
         );
@@ -56,7 +61,7 @@ export default function RegisterComponent() {
         <Stack
           spacing={4}
           p="1rem"
-          bg={() => (getColorMode() ? "blackAlpha.300" : "whiteAlpha.900")}
+          bg={useColorModeValue( "whiteAlpha.900","blackAlpha.300")}
           boxShadow="md"
         >
           <FormControl>
@@ -116,6 +121,7 @@ export default function RegisterComponent() {
             variant="solid"
             colorScheme="teal"
             width="full"
+            isLoading={load}
           >
             Registrati
           </Button>

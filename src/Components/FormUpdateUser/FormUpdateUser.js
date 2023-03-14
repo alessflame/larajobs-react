@@ -1,29 +1,23 @@
 import { useState, useCallback, useEffect } from "react";
 import {
-    Flex,
     Box,
     FormControl,
-    FormLabel,
     Input,
     Stack,
     Button,
-    Heading,
     InputGroup,
     InputLeftElement,
     InputRightElement,
     Text,
-    Select,
-    useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
 import { useFormik } from "formik";
 
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import {  FaLock } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
-import { fetchSign, fetchUpdateUser } from "../../helper/Api/Auth/authApi";
+import { fetchUpdateUser } from "../../helper/Api/Auth/authApi";
 import { useDispatch } from "react-redux";
 import { isOpen } from "../../redux/slices/modalSlice";
-import { getColorMode } from "../../helper/colorMode/colorMode";
 
 import { getAllCategories } from "../../helper/Api/GetApi";
 import { tokenDecode } from "../../helper/Api/token";
@@ -33,7 +27,8 @@ export default function FormUpdateUser() {
     const [categories, setCategories] = useState([]);
 
     //form
-    const [category, setCategory] = useState("");
+    const [load, setLoad]=useState(false);
+
 
     const getCategoriesForm = useCallback(async () => {
         setCategories(await getAllCategories());
@@ -54,9 +49,11 @@ export default function FormUpdateUser() {
         onSubmit: async (values) => {
             // alert(JSON.stringify(values, null, 2));
             // console.log(values);
+            setLoad(true);
             const response = await fetchUpdateUser(values);
             //  console.log(response);
             if (!response) {
+                setLoad(false);
                 return dispatch(
                     isOpen({
                         title: "Impossibile modificare",
@@ -64,6 +61,7 @@ export default function FormUpdateUser() {
                     })
                 );
             } else {
+                setLoad(false);
                 return dispatch(
                     isOpen({
                         title: "Modificato con successo",
@@ -81,9 +79,9 @@ export default function FormUpdateUser() {
                 <Stack
                     spacing={4}
                     p="1rem"
-                    bg={() =>
-                        getColorMode() ? "blackAlpha.300" : "whiteAlpha.900"
-                    }
+                    // bg={() =>
+                    //     getColorMode() ? "blackAlpha.300" : "whiteAlpha.900"
+                    // }
                     boxShadow="md"
                 >
   
@@ -150,6 +148,7 @@ export default function FormUpdateUser() {
                         colorScheme="teal"
                         width="full"
                         mt={4}
+                        isLoading={load}
                     >
                         Modifica
                     </Button>

@@ -8,13 +8,13 @@ import {
     TabList,
     TabPanel,
     TabPanels,
+    useColorModeValue
 } from "@chakra-ui/react";
 import { IoCodeWorking } from "react-icons/io5";
 import LoginComponent from "../Components/Auth/LoginComponent";
 import RegisterComponent from "../Components/Auth/RegisterComponent";
 import { useNavigate } from "react-router-dom";
 import ModalComponent from "../Components/Modal/ModalComponent";
-import { getColorMode } from "../helper/colorMode/colorMode";
 
 import useAuth from "../hooks/useAuth";
 // import { getSomeJobs } from "../helper/Api/GetApi";
@@ -44,7 +44,7 @@ const App = () => {
             flexDirection="column"
             width="100wh"
             height="100vh"
-            bg={() => (getColorMode() ? "dark" : "gray.200")}
+            bg={useColorModeValue("gray.200","dark" )}
             justifyContent="center"
             alignItems="center"
         >

@@ -8,14 +8,15 @@ import { Link } from "react-router-dom";
 
 function ReadPdf() {
     const [cv, setCv] = useState("");
-
+    const [load, setLoad]=useState(false);
     const dispatch = useDispatch();
-    const domain= process.env.REACT_APP_SERVER_DOMAIN_FILE;
+    // const domain= process.env.REACT_APP_SERVER_DOMAIN_FILE;
 
 
     const deleteCV = async () => {
+        setLoad(true)
         const response = await deleteCvFile();
-        return( setCv(""), dispatch(isOpen({ text: response.message })));
+        return(setLoad(true), setCv(""), dispatch(isOpen({ text: response.message })));
     };
 
     const getCv = useCallback(async () => {
@@ -39,8 +40,9 @@ function ReadPdf() {
                 <Button m={2} bg={"teal.400"}>
                     <a
                         target="_blank"
-                        href={cv ? `${domain}storage/${cv}` : ""}
+                        href={cv}
                         rel="noreferrer"
+                        download
                     >
                         Visualizza
                     </a>
@@ -49,6 +51,7 @@ function ReadPdf() {
                 <Button
                     m={2}
                     bg={"red.600"}
+                    isLoading={load}
                     onClick={() => {
                         deleteCV(cv);
                     }}

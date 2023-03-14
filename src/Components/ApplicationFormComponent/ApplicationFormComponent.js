@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 function ApplicationFormComponent({ job_title }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [letter, setLetter] = useState("");
+    const [load, setLoad]=useState(false);
     const { id } = useParams();
     const dispatch = useDispatch();
     // const modal = useSelector((state) => state.modal);
@@ -58,14 +59,16 @@ function ApplicationFormComponent({ job_title }) {
                         <Button colorScheme="blue" mr={3} onClick={onClose}>
                             Chiudi
                         </Button>
-                        <Button
+                        <Button isLoading={load}
                             variant="ghost"
                             onClick={async () => {
+                                setLoad(true);
                                 const message = await storeApplication(
                                     letter,
                                     id
                                 );
                                 onClose();
+                                setLoad(false)
                                 dispatch(
                                     normalModalOpen({
                                         title: "complimenti ti sei candidato!",

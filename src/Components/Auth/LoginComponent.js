@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import {
+  useColorModeValue,
   Stack,
   Box,
   Button,
@@ -9,16 +10,17 @@ import {
   InputLeftElement,
   Input,
   InputRightElement,
+  
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { FaLock } from "react-icons/fa";
 import { IoMailSharp } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { dispatchAuthUser } from "../../redux/setData/setData";
-import { getColorMode } from "../../helper/colorMode/colorMode";
 
 export default function LoginComponent() {
   const [showPassword, setShowPassword] = useState(false);
+  const [load, setLoad]=useState(false);
   const dispatch = useDispatch();
 
   const handleShowClick = () => setShowPassword(!showPassword);
@@ -29,6 +31,7 @@ export default function LoginComponent() {
       password: "",
     },
     onSubmit: async (values) => {
+      setLoad(true);
       // alert(JSON.stringify(values, null, 2));
       // const response = await fetchSign("login", values);
       // if (response) {
@@ -59,8 +62,9 @@ export default function LoginComponent() {
         <Stack
           spacing={4}
           p="1rem"
-          bg={() => (getColorMode() ? "blackAlpha.300" : "whiteAlpha.900")}
           boxShadow="md"
+          bg={useColorModeValue ( "whiteAlpha.900","blackAlpha.300")}
+
         >
           <FormControl>
             <InputGroup>
@@ -104,6 +108,7 @@ export default function LoginComponent() {
             variant="solid"
             colorScheme="teal"
             width="full"
+            isLoading={load}
           >
             Login
           </Button>

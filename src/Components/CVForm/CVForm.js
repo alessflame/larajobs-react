@@ -7,6 +7,7 @@ import { isOpen } from "../../redux/slices/modalSlice";
 function CVForm() {
     const [file, setFile] = useState();
     const inputRef = useRef();
+    const [load, setLoad]=useState(false);
     const dispatch = useDispatch();
     const handleDrag = (e) => {
         e.preventDefault();
@@ -21,18 +22,23 @@ function CVForm() {
 
     const handleUpload = async (e) => {
         e.preventDefault();
-
+        setLoad(true);
         // console.log(file[0]);
         // console.log("file", file[0].name);
 
         const name = file[0].name.split(".");
-        if (name[name.length - 1] !== "pdf") {
+        if (
+            name[name.length - 1] !== "png" &&
+            name[name.length - 1] !== "jpeg" &&
+            name[name.length - 1] !== "jpg"
+        ) {
             return (
+                setLoad(false),
                 setFile(null),
                 dispatch(
                     isOpen({
                         title: "Errore",
-                        text: "I file accettati sono solo i PDF",
+                        text: "I file accettati sono solo PNG, JPEG, JPG",
                     })
                 )
             );
@@ -40,7 +46,8 @@ function CVForm() {
 
         const call = await storeCV(file[0]);
 
-        return (setFile(null), dispatch(isOpen({ title: call.message })));
+        return (setFile(null), setLoad(false),
+        dispatch(isOpen({ title: call.message })));
     };
 
     if (file)
@@ -50,7 +57,7 @@ function CVForm() {
                 <Button m={2} bg={"red.500"} onClick={() => setFile(null)}>
                     Cancella
                 </Button>
-                <Button m={2} bg={"teal.400"} onClick={handleUpload}>
+                <Button m={2} bg={"teal.400"} isLoading={load} onClick={handleUpload}>
                     Conferma
                 </Button>
             </Box>
