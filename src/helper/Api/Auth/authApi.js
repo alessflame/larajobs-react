@@ -20,6 +20,7 @@ export const fetchLogout = async () => {
 };
 
 
+
 export const fetchUpdateUser = async (data) => {
     try {
         let response = await instanceWithToken(getToken()).put(
