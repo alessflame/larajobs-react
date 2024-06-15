@@ -38,9 +38,9 @@ function UserAvatar({ name }) {
                                     color="teal.400"
                                     decoration="ActiveBorder"
                                 >
-                                    <Link to="/dashboard/cv" color="teal.400">
+                                    {/* <Link to="/dashboard/cv" color="teal.400">
                                         Vedi il tuo CV
-                                    </Link>
+                                    </Link> */}
                                 </Text>
                             </Box>
                         </Flex>

@@ -36,7 +36,7 @@ export default function RegisterComponent() {
       // console.log(values);
       setLoad(true);
       const response = await fetchSign("register", values);
-      //  console.log(response);
+        console.log(response);
       if (!response) {
         setLoad(false);
         return dispatch(
